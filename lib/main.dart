@@ -17,14 +17,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.green,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text('Schulte Table Oyunu'),
-        ),
-        body: Center(
-            child: GreetPage(),
-        )
-      ),
+      home: GreetPage()
     );
   }
 }
