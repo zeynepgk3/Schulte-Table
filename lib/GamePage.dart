@@ -50,7 +50,7 @@ class _GamePageState extends State<GamePage> {
     return Material(
       child: Scaffold(
         appBar: AppBar(
-          title: Text("Oyun Ekranı"),
+          title: Text("Oyun Sayfası"),
         ),
         body: (puan == 250)
             ? Center(
@@ -61,8 +61,11 @@ class _GamePageState extends State<GamePage> {
                         textAlign: TextAlign.center,
                         style: TextStyle(
                             color: Colors.orange,
-                            fontSize: 20,
+                            fontSize: 30,
                             fontWeight: FontWeight.bold)),
+                    SizedBox(
+                      height: 40,
+                    ),
                     ElevatedButton(
                         onPressed: () {
                           nextInt = 1;
@@ -78,6 +81,7 @@ class _GamePageState extends State<GamePage> {
                 ),
               )
             : Column(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Expanded(
                     flex: 2,
@@ -85,7 +89,7 @@ class _GamePageState extends State<GamePage> {
                       padding: const EdgeInsets.all(20),
                       child: Column(
                         children: <Widget>[
-                          Text("Selam $name!",
+                          Text("SELAM $name!",
                               style: Theme.of(context).textTheme.headline5),
                           Padding(
                             padding: const EdgeInsets.only(top: 10, bottom: 10),
@@ -94,7 +98,9 @@ class _GamePageState extends State<GamePage> {
                                 "30 saniye içerisinde 1'den 25'e kadar olan tüm sayıları seç! Bol şans!",
                                 style: TextStyle(
                                   fontSize: 18,
+                                  color: Colors.black45,
                                 ),
+                                textAlign: TextAlign.center,
                               ),
                             ),
                           ),
@@ -150,9 +156,12 @@ class _GamePageState extends State<GamePage> {
                                                 textAlign: TextAlign.center,
                                                 style: TextStyle(
                                                     color: Colors.orange,
-                                                    fontSize: 20,
+                                                    fontSize: 30,
                                                     fontWeight:
                                                         FontWeight.bold)),
+                                            SizedBox(
+                                              height: 40,
+                                            ),
                                             ElevatedButton(
                                                 onPressed: () {
                                                   nextInt = 1;
@@ -204,22 +213,27 @@ class MyBox extends StatelessWidget {
     return Container(
       child: Center(
         child: (isFound)
-            ? Container(child: Text(""),)
+            ? Container(
+                child: Text(""),
+              )
             : Container(
-              child: Center(
-                child: Text(
+                child: Center(
+                  child: Text(
                     "$number",
-                    style: TextStyle(color:Colors.white,fontWeight: FontWeight.bold,fontSize: 30,),
-                  textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 30,
+                    ),
+                    textAlign: TextAlign.center,
                   ),
+                ),
+                color: Colors.orange,
+                width: 60,
+                height: 60,
               ),
-            color: Colors.orange,
-            width: 60,
-            height: 60,
-            ),
-
       ),
-   //   color: Colors.blue,
+      //   color: Colors.blue,
     );
   }
 }

@@ -36,7 +36,10 @@ class _GreetPageState extends State<GreetPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Image.asset("assets/brain-logo.png", width: 100,),
-              Text("BRAIN STORM",style: TextStyle(color:Colors.orange)),
+              SizedBox(height: 10,),
+              Text("BRAINSTORM",style: TextStyle(color:Colors.orange, fontSize: 30, fontWeight: FontWeight.bold)),
+              Text("Zeynep Gök - 1306170046", style: TextStyle(color: Colors.orange,),),
+              SizedBox(height: 40,),
               Padding(
                 padding: const EdgeInsets.all(16),
                 child: TextFormField(
