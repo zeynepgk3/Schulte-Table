@@ -3,7 +3,6 @@ import 'package:schulte_table_game/GamePage.dart';
 import 'package:schulte_table_game/Box.dart';
 
 class GreetPage extends StatefulWidget {
-  GreetPage({String oldname});
 
   @override
   _GreetPageState createState() => _GreetPageState();

@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:schulte_table_game/Box.dart';
-import 'package:schulte_table_game/Greet.dart';
+import 'package:schulte_table_game/MyBox.dart';
 
 class GamePage extends StatefulWidget {
   final String name;
@@ -70,9 +70,7 @@ class _GamePageState extends State<GamePage> {
                         onPressed: () {
                           nextInt = 1;
                           puan = 0;
-                          Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) =>
-                                  Material(child: GreetPage())));
+                          Navigator.of(context).pop();
                         },
                         child: Text("Tekrar Oyna",
                             style: TextStyle(
@@ -85,39 +83,45 @@ class _GamePageState extends State<GamePage> {
                 children: [
                   Expanded(
                     flex: 2,
-                    child: Padding(
-                      padding: const EdgeInsets.all(20),
-                      child: Column(
-                        children: <Widget>[
-                          Text("SELAM $name!",
-                              style: Theme.of(context).textTheme.headline5),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 10, bottom: 10),
-                            child: Center(
-                              child: Text(
-                                "30 saniye içerisinde 1'den 25'e kadar olan tüm sayıları seç! Bol şans!",
-                                style: TextStyle(
-                                  fontSize: 18,
-                                  color: Colors.black45,
+                    child: (_timeCounter == 0 || puan == 250)
+                        ? Container()
+                        : Padding(
+                            padding: const EdgeInsets.all(20),
+                            child: Column(
+                              children: <Widget>[
+                                Text("SELAM $name!",
+                                    style:
+                                        Theme.of(context).textTheme.headline5),
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                      top: 10, bottom: 10),
+                                  child: Center(
+                                    child: Text(
+                                      "30 saniye içerisinde 1'den 25'e kadar olan tüm sayıları seç! Bol şans!",
+                                      style: TextStyle(
+                                        fontSize: 18,
+                                        color: Colors.black45,
+                                      ),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ),
                                 ),
-                                textAlign: TextAlign.center,
-                              ),
+                                (_timeCounter == 30)
+                                    ? ElevatedButton(
+                                        onPressed: () => _startGame(),
+                                        child: Text("Başla!",
+                                            style: TextStyle(
+                                                fontSize: 20,
+                                                fontWeight: FontWeight.bold)))
+                                    : Text(
+                                        "$_timeCounter",
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .headline3,
+                                      ),
+                              ],
                             ),
                           ),
-                          (_timeCounter == 30)
-                              ? ElevatedButton(
-                                  onPressed: () => _startGame(),
-                                  child: Text("Başla!",
-                                      style: TextStyle(
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.bold)))
-                              : Text(
-                                  "$_timeCounter",
-                                  style: Theme.of(context).textTheme.headline3,
-                                ),
-                        ],
-                      ),
-                    ),
                   ),
                   Expanded(
                     flex: 5,
@@ -166,12 +170,7 @@ class _GamePageState extends State<GamePage> {
                                                 onPressed: () {
                                                   nextInt = 1;
                                                   puan = 0;
-                                                  Navigator.of(context).push(
-                                                      MaterialPageRoute(
-                                                          builder: (context) =>
-                                                              Material(
-                                                                  child:
-                                                                      GreetPage())));
+                                                  Navigator.of(context).pop();
                                                 },
                                                 child: Text("Tekrar Oyna",
                                                     style: TextStyle(
@@ -187,53 +186,19 @@ class _GamePageState extends State<GamePage> {
                     ),
                   ),
                   Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.all(20),
-                      child: Text(
-                        "Puan: $puan",
-                        style: Theme.of(context).textTheme.headline4,
-                      ),
-                    ),
+                    child: (_timeCounter == 0 || puan == 250)
+                        ? Container()
+                        : Padding(
+                            padding: const EdgeInsets.all(20),
+                            child: Text(
+                              "Puan: $puan",
+                              style: Theme.of(context).textTheme.headline4,
+                            ),
+                          ),
                   ),
                 ],
               ),
       ),
-    );
-  }
-}
-
-class MyBox extends StatelessWidget {
-  int number;
-  bool isFound;
-
-  MyBox({this.number, this.isFound});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: Center(
-        child: (isFound)
-            ? Container(
-                child: Text(""),
-              )
-            : Container(
-                child: Center(
-                  child: Text(
-                    "$number",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 30,
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
-                ),
-                color: Colors.orange,
-                width: 60,
-                height: 60,
-              ),
-      ),
-      //   color: Colors.blue,
     );
   }
 }
