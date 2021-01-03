@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:schulte_table_game/Box.dart';
 import 'package:schulte_table_game/MyBox.dart';
+import 'package:schulte_table_game/ResultChart.dart';
 
 class GamePage extends StatefulWidget {
   final String name;
@@ -15,16 +16,20 @@ class GamePage extends StatefulWidget {
 
 class _GamePageState extends State<GamePage> {
   String name;
-  List<Box> boxList = new List<Box>();
+  List<Box> boxList =List<Box>();
   int nextInt = 1;
   int puan = 0;
   int _timeCounter = 30;
   Timer _timer;
+  DateTime prevClickTime;
+  DateTime currentClickTime;
+  int secondsBetweenClicks;
 
   _GamePageState(this.name, this.boxList);
 
-  void _startGame() {
+  void _startGame(DateTime startTime) {
     _timeCounter = 30;
+    prevClickTime=startTime;
     if (_timer != null) {
       _timer.cancel();
     }
@@ -74,7 +79,8 @@ class _GamePageState extends State<GamePage> {
                         },
                         child: Text("Tekrar Oyna",
                             style: TextStyle(
-                                fontSize: 20, fontWeight: FontWeight.bold)))
+                                fontSize: 20, fontWeight: FontWeight.bold))),
+                    ResultChart(boxList),
                   ],
                 ),
               )
@@ -108,7 +114,7 @@ class _GamePageState extends State<GamePage> {
                                 ),
                                 (_timeCounter == 30)
                                     ? ElevatedButton(
-                                        onPressed: () => _startGame(),
+                                        onPressed: () => _startGame(DateTime.now()),
                                         child: Text("Başla!",
                                             style: TextStyle(
                                                 fontSize: 20,
@@ -139,6 +145,14 @@ class _GamePageState extends State<GamePage> {
                                           boxList[index].setIsFound(true);
                                           puan += 10;
                                           nextInt++;
+                                          if(DateTime.now().minute!=prevClickTime.minute){
+                                            secondsBetweenClicks=DateTime.now().second-prevClickTime.second+60;
+                                          }
+                                          else{
+                                            secondsBetweenClicks=DateTime.now().second-prevClickTime.second;
+                                          }
+                                          prevClickTime=DateTime.now();
+                                          boxList[index].setSpentTime(secondsBetweenClicks);
                                         })
                                       }
                                   },
@@ -163,6 +177,8 @@ class _GamePageState extends State<GamePage> {
                                                     fontSize: 30,
                                                     fontWeight:
                                                         FontWeight.bold)),
+                                            //Text("$testResult"),
+                                            ResultChart(boxList),
                                             SizedBox(
                                               height: 40,
                                             ),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 class MyBox extends StatelessWidget {
   int number;
   bool isFound;
+  int spentTime;
 
   MyBox({this.number, this.isFound});
 

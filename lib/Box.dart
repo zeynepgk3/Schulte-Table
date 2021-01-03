@@ -1,10 +1,9 @@
 class Box {
   int number;
   bool isFound;
-  bool isTouched;
+  int spentTime;
 
-  Box({this.number,this.isFound,this.isTouched});
-
+  Box({this.number,this.isFound,this.spentTime});
 
   void setNumber(int number){
     this.number=number;
@@ -12,16 +11,16 @@ class Box {
   void setIsFound(bool isFound){
     this.isFound=isFound;
   }
- /* void setIsTouched(bool isFound){
-    this.isTouched=isTouched;
-  }*/
+  void setSpentTime(int spentTime){
+    this.spentTime=spentTime;
+  }
   int getNumber(){
     return number;
   }
   bool getIsFound(){
     return isFound;
   }
- /* bool getIsTouched(){
-    return isTouched;
-  }*/
+  int getSpentTime(){
+    return spentTime;
+  }
 }
